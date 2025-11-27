@@ -15,41 +15,88 @@
     <title>Performative Male</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body" id="my-nav">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+    <div class="brand-wrapper">
+      <a class="navbar-brand" id="hero-text" href="#">Performative <br> Website</a>
+    </div>
+    <div class="nav-item">
+      <a class="justify-content-end fs-5" href="">About</a>
     </div>
   </div>
 </nav>
+
+<div id="main-content">
+  <div class="my-carousel">
+    <div class="item"><img src="media/labubu-1.png" alt="" id="my-image"></div>
+    <div class="item"><img src="media/matcha-1.png" alt="" id="my-image"></div>
+    <div class="item"><img src="media/walkman-1.png" alt="" id="my-image"></div>
+    <div class="item"><img src="media/poster-1.png" alt="" id="my-image"></div>
+  </div>
+</div>
+
+<script>
+// Scroll-drag infinite carousel ChatGPT
+  const slider = document.querySelector('.my-carousel');
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  // Duplicate items once on load for infinite effect
+  slider.innerHTML += slider.innerHTML;
+  slider.addEventListener('dragstart', (e) => e.preventDefault());
+  const startDragging = (e) => {
+    isDown = true;
+    slider.classList.add('active');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  }
+
+  const stopDragging = () => {
+    isDown = false;
+  }
+
+  // Drag to scroll
+  const move = (e) => {
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 1.2; 
+    slider.scrollLeft = scrollLeft - walk;
+
+    const width = slider.scrollWidth / 2;
+
+    // If scrolling reaches the duplicated end → jump to original
+    if (slider.scrollLeft >= width) {
+      slider.scrollLeft -= width;
+    }
+    if (slider.scrollLeft <= 0) {
+      slider.scrollLeft += width;
+    }
+  }
+
+  // Listeners
+  slider.addEventListener('mousedown', startDragging);
+  slider.addEventListener('mouseleave', stopDragging);
+  slider.addEventListener('mouseup', stopDragging);
+  slider.addEventListener('mousemove', move);
+  // Add the event listeners
+  slider.addEventListener('mousemove', move, false);
+  slider.addEventListener('mousedown', startDragging, false);
+  slider.addEventListener('mouseup', stopDragging, false);
+  slider.addEventListener('mouseleave', stopDragging, false);
+
+
+  const hero = document.getElementById("hero-text");
+  const main = document.getElementById("main-content");
+
+  // Initially blur everything except hero
+  main.classList.add("blur");
+
+  main.addEventListener("click", () => {
+    hero.classList.add("shrink");
+    main.classList.remove("blur");
+  });
+</script>
 </body>
 </html>

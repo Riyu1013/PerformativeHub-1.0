@@ -1,0 +1,91 @@
+@font-face {
+    font-family: 'OpenSauceRegular';
+    src: url(fonts/OpenSauceSans-Regular.ttf);
+}
+@font-face {
+    font-family: 'OpenSauceBold';
+    src: url(fonts/OpenSauceSans-Bold.ttf);
+}
+
+.navbar-brand, a{
+    font-family: 'OpenSauceBold';
+    font-size: 2rem;
+    line-height: 100%;
+}
+.nav-item{
+    padding-top: 1%;    
+    margin-left: auto;
+    align-self: flex-start; /* About stays at the top too */
+}
+.container-fluid{
+    display: flex;
+    align-items: flex-start;
+}
+
+.brand-wrapper {
+  position: relative;       /* keeps navbar height intact */
+  height: 2.5rem;           /* same as navbar height */
+  overflow: visible;         /* allow the huge text to overflow */
+}
+
+#hero-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 2rem;             /* base font size */
+  transform: scale(5);         /* initial huge size */
+  transform-origin: left top;
+  z-index: 100;
+  transition: transform 0.7s ease;
+  pointer-events: auto;         /* allow clicks */
+}
+
+/* When clicked / shrunk */
+#hero-text.shrink {
+  transform: scale(1);          /* shrink to normal size */
+}
+
+/* Blurred content */
+#main-content.blur {
+  filter: blur(8px);
+  transition: filter 0.8s ease-in-out;
+}
+
+#main-content{
+    transition: filter 0.8s ease-in-out;
+}
+
+.my-carousel{
+  margin-top:1.5em;
+  height: 100%;
+  border: 1px solid red;
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: auto; 
+  white-space: nowrap;
+  gap: -5em;
+}
+
+.my-carousel::-webkit-scrollbar{
+    display: none;
+}
+.my-carousel{
+    scrollbar-width: none;
+}
+.my-carousel .item img{
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+}
+
+.my-carousel .item{
+    width: 60%;
+    height: 70%;
+  /* line-height: 100px; */
+  text-align: center;
+  background-color: white;
+  margin-right: 2px;
+  flex-shrink: 0;
+}
+
+
