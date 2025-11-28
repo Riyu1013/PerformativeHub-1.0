@@ -179,5 +179,29 @@
   position: absolute;
   margin-bottom: 30%;
   transition: width 0.5s ease-in-out, height 0.5s ease-in-out, margin-top 0.5s ease-in-out;
+}
 
+
+#pop-up{
+  width: 200px;
+  height: 200px;
+  background-color: gray;
+  position: absolute;
+  display: block;
+  transition: display 0.8s ease-in-out;
+}
+
+#pop-up.hidden{
+  display: none;
+  transition: display 0.8s ease-in-out;
+}
+
+#main{
+  filter: blur(0px);
+  transform: filter 0.8s ease-in-out;
+}
+
+#main.blur{
+  filter: blur(50px);
+  transition: filter 0.8s ease-in-out;
 }
