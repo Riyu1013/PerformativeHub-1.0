@@ -25,32 +25,55 @@
       </div>
     </div>
   </nav>
-<div id="main">
-  <table class="table table-hover caption-top table-hover" id="table-books">
-    <caption>Books</caption>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Tag</th>
-        <th>Publisher</th>
-        <th>Year</th>
-      </tr>
-    </thead>
-    <tbody class="table-group-divider" id="tbody-books">
-      asdaswd
-    </tbody>
-  </table>
-</div>
 
-  <div id="pop-up">
-    
+  <div id="books-container">
+    <div id="purchase-popup">
+      
+    </div>
+
+    <div class="container-fluid" id="main">
+      <table class="table table-hover caption-top table-hover" id="table-books">
+        <caption>Books</caption>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Tag</th>
+            <th>Publisher</th>
+            <th>Year</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider" id="tbody-books">
+        </tbody>
+      </table>
+    </div>
   </div>
+
+
+  
 
   <script>
     // Add books here following the given format
     const BOOKS = [
       {
         "title": "Sylvia Path",
+        "tag": "",
+        "publisher": "",
+        "year": ""
+      },
+      {
+        "title": "Sofia",
+        "tag": "",
+        "publisher": "",
+        "year": ""
+      },
+      {
+        "title": "The Apartment We Won't Share",
+        "tag": "",
+        "publisher": "",
+        "year": ""
+      },
+      {
+        "title": "You'll Be In My Heart",
         "tag": "",
         "publisher": "",
         "year": ""
@@ -82,18 +105,16 @@
 
       tbody.appendChild(row);
     }
-    
-
 
     //Add clickable tbody
     
-    const main = document.getElementById("main")
-    const popUp = document.getElementById("pop-up")
-    popUp.classList.add("hidden")
+    const main = document.getElementById("main");
+    const popUp = document.getElementById("purchase-popup");
+    popUp.classList.add("hidden");
 
     tbody.addEventListener("click", () => {
       main.classList.add("blur");
-      popUp.classList.remove("hidden")
+      popUp.classList.remove("hidden");
     });
 
   </script>

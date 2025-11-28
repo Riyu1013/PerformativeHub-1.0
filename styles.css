@@ -33,10 +33,11 @@
   color: black;
 }
 
-.container-fluid{
+/* Need ba 'to? */
+/*.container-fluid{
     display: flex;
     align-items: flex-start;
-}
+}*/
 
 .brand-wrapper {
   position: relative;       /* keeps navbar height intact */
@@ -182,16 +183,17 @@
 }
 
 
-#pop-up{
+#purchase-popup{
   width: 200px;
   height: 200px;
   background-color: gray;
-  position: absolute;
+  position: fixed;
   display: block;
   transition: display 0.8s ease-in-out;
+  z-index: 5;
 }
 
-#pop-up.hidden{
+#purchase-popup.hidden{
   display: none;
   transition: display 0.8s ease-in-out;
 }
@@ -204,4 +206,9 @@
 #main.blur{
   filter: blur(50px);
   transition: filter 0.8s ease-in-out;
+}
+
+#books-container {
+  display: flex;
+  justify-content: center;
 }
