@@ -17,6 +17,22 @@
     margin-left: auto;
     align-self: flex-start; /* About stays at the top too */
 }
+
+#nav-item{
+  filter: blur(0px);
+  transition: filter 0.8s ease-in;
+}
+
+#nav-item.blur{
+  filter: blur(30px);
+  transition: filter 0.8s ease-in;
+}
+
+.nav-item, a{
+  text-decoration: none;
+  color: black;
+}
+
 .container-fluid{
     display: flex;
     align-items: flex-start;
@@ -80,17 +96,88 @@
 }
 
 .my-carousel .item{
-    width: 60%;
-    height: 70%;
-  /* line-height: 100px; */
+  width: 60%;
+  height: 70%;
   text-align: center;
   background-color: white;
   margin-right: 2px;
   flex-shrink: 0;
 }
 
-
 .my-image{
   filter: blur(30px);
   transition: filter 0.5s ease;
+}
+
+#scrollingCanvas {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 9999;
+    display: block;
+}
+
+
+/* DRINK.HTML */
+.drink-selection{
+  display: flex;  
+  justify-content: space-around;
+  flex-direction: row;
+  height: 100vh;
+  align-items: center;
+}
+
+.drink-item{
+  width: 25vw;
+  aspect-ratio: 1;
+  background-color: gray;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+
+  border-radius: 2%;
+}
+
+.drink-item .drink-image{
+  z-index: 999;
+  margin-top: 30%;
+  width: 150%;
+  height: auto;
+  object-fit: contain;
+  
+  position: absolute;
+  margin-bottom: 30%;
+
+  transition: width 0.5s ease-in-out, height 0.5s ease-in-out, margin-top 0.5s ease-in-out;
+}
+
+.drink-item:hover .drink-image{
+  width: 250%;
+  height: auto;
+  margin-top: 0;
+  transition: width 0.5s ease-in-out, height 0.5s ease-in-out, margin-top 0.5s ease-in-out;
+}
+
+.drink-item:hover .splash-image{
+  width: 250%;
+  height: auto;
+  margin-top: 0;
+  transition: width 0.5s ease-in-out, height 0.5s ease-in-out, margin-top 0.5s ease-in-out;
+
+}
+
+.splash-image{
+  margin-top: 30%;
+  width: 0%;
+  height: auto;
+  object-fit: contain;
+  
+  position: absolute;
+  margin-bottom: 30%;
+  transition: width 0.5s ease-in-out, height 0.5s ease-in-out, margin-top 0.5s ease-in-out;
+
 }

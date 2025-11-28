@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="styles.css">
     
-    <title>Performative Male</title>
+    <title>Performative Website</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body" id="my-nav">
@@ -20,20 +20,22 @@
     <div class="brand-wrapper">
       <a class="navbar-brand" id="hero-text" href="#">Performative <br> Website</a>
     </div>
-    <div class="nav-item">
+    <div class="nav-item" id="nav-item">
       <a class="justify-content-end fs-5" href="">About</a>
     </div>
   </div>
 </nav>
 
 <div id="main-content">
-  <div class="my-carousel">
+  <div class="my-carousel" id="my-carousel">
     <div class="item"><img src="media/labubu-1.png" alt="" class="my-image"></div>
-    <div class="item"><img src="media/matcha-1.png" alt="" class="my-image"></div>
+    <div class="item"><a href="drink.html"><img src="media/matcha-1.png" alt="" class="my-image"></a></div>
     <div class="item"><img src="media/walkman-1.png" alt="" class="my-image"></div>
     <div class="item"><img src="media/poster-1.png" alt="" class="my-image"></div>
   </div>
 </div>
+
+<canvas id="scrollingCanvas" width="1300" height="40"></canvas>
 
 <script>
 // Scroll-drag infinite carousel vibe coded using ChatGPT <3 hehe
@@ -75,6 +77,27 @@
     }
   }
 
+  //Checks if user drags or user clicks on item
+  const links = document.querySelectorAll('.my-carousel a');
+
+  let isDragging = false;
+
+  slider.addEventListener('mousedown', () => {
+    isDragging = false; // reset on new drag
+  });
+
+  slider.addEventListener('mousemove', () => {
+    isDragging = true; // user moved mouse → it’s a drag
+  });
+
+  links.forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (isDragging) {
+        e.preventDefault(); // prevent navigation if it was a drag
+      }
+    });
+  });
+
   // Listeners
   slider.addEventListener('mousedown', startDragging);
   slider.addEventListener('mouseleave', stopDragging);
@@ -87,20 +110,37 @@
   slider.addEventListener('mouseleave', stopDragging, false);
 
 
+
+
+
+  // PROGRAM FOR THE FIRST CLICK TO UNBLUR
   const hero = document.getElementById("hero-text");
   const main = document.getElementById("main-content");
+  const carousel = document.getElementById("my-carousel");
+  carousel.style.pointerEvents = "none";
 
   // Initially blur everything except hero
   main.classList.add("blur");
+  const navItem = document.getElementById("nav-item");
+  navItem.classList.add("blur")
 
-  //When clicked any where on the website, hero text shrinks to navbar and website unblurs
+  //When clicked anywhere on the website, hero text shrinks to navbar and website unblurs
   main.addEventListener("click", () => {
     hero.classList.add("shrink");
     main.classList.remove("blur");
+    navItem.classList.remove("blur");
+    carousel.style.pointerEvents = "auto";
   });
 
-  const carouselCards = document.querySelectorAll(".my-image");
 
+
+
+
+
+
+  // PROGRAM FOR HOVER OVER "ITEM CARD" IN CAROUSEL
+
+  const carouselCards = document.querySelectorAll(".my-image");
   carouselCards.forEach((img) => {
     img.addEventListener("mouseover", () => {
       img.style.filter = "blur(0px)";
@@ -109,6 +149,45 @@
       img.style.filter = "blur(30px)";
     });
   });
+
+
+
+
+
+
+  // PROGRAM FOR CRAWLER IN FOOTER
+  const canvas = document.getElementById('scrollingCanvas');
+  const ctx = canvas.getContext('2d');
+
+  // Get current display size of canvas
+  const styleWidth = canvas.clientWidth;
+  const styleHeight = canvas.clientHeight;
+
+  // Increase internal resolution
+  canvas.width = styleWidth * window.devicePixelRatio;
+  canvas.height = styleHeight * window.devicePixelRatio;
+
+  // Scale drawing operations to match
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+  const text = "• CULTURAL METRIC: The optimal number of unopened copies of Sylvia Plath one must own is now three. One for the shelf, one for the tote, one for the 'just started reading.' • JUST IN: Matcha lattes officially overtake artisanal pour-overs as the superior beverage for thoughtful brooding at outdoor cafes.";
+  let x = styleWidth;
+
+  function draw() {
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, styleWidth, styleHeight);
+    ctx.font = '20px OpenSauceRegular'; // large text, stays crisp
+    ctx.fillStyle = 'white'
+    ctx.fillText(text, x, 40);
+    
+    x -= 2;
+    if (x < -ctx.measureText(text).width) {
+      x = styleWidth;
+    }
+    requestAnimationFrame(draw);
+  }
+
+  draw();
 
 </script>
 </body>
