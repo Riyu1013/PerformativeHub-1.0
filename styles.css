@@ -173,22 +173,18 @@
     padding-top: 1rem;
   }
 
-  #vinyl-container {
-    flex: 1 1 50%;
+#vinyl-container {
+    /*flex: 1 1 50%;*/
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-#vinyl-container {
-    position: relative; 
+    position: relative;
 }
 
-.vinyl-record {
+#vinyl-record {
     width: 25rem;
     height: auto;
     display: block;
-    animation: spin 4s linear infinite paused; 
 }
 
 #album-cover-img {
@@ -199,11 +195,11 @@
     z-index: 10; 
     pointer-events: none;
     opacity: 0; 
-    transition: opacity 0.5s ease-in-out; 
+    transition: opacity 0.5s ease-in-out;
 }
 
-.is-playing .vinyl-record {
-    animation-play-state: running;
+.is-playing {
+    animation: spin 4s linear infinite; 
 }
 
 .is-playing #album-cover-img {
@@ -211,6 +207,5 @@
 }
 
 @keyframes spin {
-    from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
