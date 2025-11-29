@@ -96,7 +96,7 @@
 }
 
 /* Start of MoviePage css */
-        body {
+        .movie-body {
             /* Ensures body takes up the entire browser viewport */
             min-height: 100vh; 
             margin: 0; 
@@ -109,34 +109,34 @@
         }
 
         h1 {
-          font-size: 50px;
-          margin-left: 20px;
+          font-size: 2rem;
+          margin-left: 3rem;
           text-align: left;
-          margin-bottom: 20px;
+          margin-bottom: 0;
         }
 
         #description {
-          max-width: 1200px;
+          max-width: auto;
           margin: 0 auto;
-          padding-top: 50px;
-          padding-bottom: 20px;
+          padding-top: 1rem;
+          padding-bottom: 1rem;
         }
 
         .movie-container {
           display: flex;
           flex-wrap: wrap; 
           justify-content: center;
-          max-width: 1200px;
-          margin: 20px auto; 
-          gap: 15px; 
+          max-width: auto;
+          margin: 1rem auto; 
+          gap: 1rem; 
         }
 
         .movie-item {
-            height: 350px; 
-            width: calc(17% - 20px); 
+            height: 18rem; 
+            width: 12rem;
             flex-shrink: 0;
             transition: transform 0.3s ease, border-radius 0.3s ease;
-            margin: 10px;
+            margin: 1rem;
             overflow: hidden;
         }
 
@@ -149,3 +149,68 @@
             height: 100%;
             object-fit: cover;
         }
+
+/*End of Movie Page CSS */
+
+/*Start of Music Page CSS */
+
+  .music-body {
+    min-height: 100vh; 
+    min-width: 100vw;
+    margin: auto; 
+    margin-left: 1rem;
+    margin-right: 1rem;
+    display: flex;
+    justify-content: center; 
+    text-align: left;
+    align-items: flex-start;
+    flex-direction: row;
+    padding: 1rem;
+  }
+
+  #song-list {
+    flex: 1 1 50%;
+    padding-top: 1rem;
+  }
+
+  #vinyl-container {
+    flex: 1 1 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+#vinyl-container {
+    position: relative; 
+}
+
+.vinyl-record {
+    width: 25rem;
+    height: auto;
+    display: block;
+    animation: spin 4s linear infinite paused; 
+}
+
+#album-cover-img {
+    position: absolute;
+    width: 8rem; 
+    height: 8rem;
+    border-radius: 50%; 
+    z-index: 10; 
+    pointer-events: none;
+    opacity: 0; 
+    transition: opacity 0.5s ease-in-out; 
+}
+
+.is-playing .vinyl-record {
+    animation-play-state: running;
+}
+
+.is-playing #album-cover-img {
+    opacity: 1; 
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
