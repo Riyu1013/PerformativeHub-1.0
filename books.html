@@ -27,6 +27,7 @@
   </nav>
 
   <div id="books-container">
+
     <div class="container-fluid" id="main">
       <h2 class="mt-5">Books</h2>
       <table class="table table-hover" id="table-books">
@@ -43,22 +44,24 @@
       </table>
     </div>
 
-    <div class="card mb-3" style="max-width: 540px;" id="purchase-popup">
+    <div class="card mb-3 hidden" style="max-width: 540px;" id="purchase-popup">
       <button type="button" class="btn-close" aria-label="Close" id=button-close-purchase-popup></button>
       <div class="row g-0">
         <div class="col-md-4">
-          <img src="..." class="img-fluid rounded-start" alt="...">
+          <img src="" class="img-fluid rounded-start" alt="" id="purchase-popup-product-cover">
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">Product Name</h5>
+            <h5 class="card-title" id="purchase-popup-product-name">Product Name</h5>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
             <div class="d-flex align-items-center" id="purchase-popup-quantity-group">
               <div class="pr-2 flex-fill border">Quantity</div>
-              <div class="flex-fill border"><p class="text-center fs-3">1</p></div>
+              <div class="flex-fill border">
+                <p class="text-center fs-3" id="purchase-quantity">#</p>
+              </div>
                 <div class="d-grid gap-2 d-md-block pl-2 flex-fill border">
-                  <button class="btn btn-primary" type="button"> - </button>
-                  <button class="btn btn-primary" type="button"> + </button>
+                  <button class="btn btn-primary" type="button" id="decrease-button"> - </button>
+                  <button class="btn btn-primary" type="button" id="increase-button"> + </button>
                 </div>
             </div>
             <button class="btn btn-primary" type="button">Add To Cart</button>
@@ -66,6 +69,7 @@
         </div>
       </div>
     </div>
+    
   </div>
 
 
@@ -76,28 +80,33 @@
         "title": "Sylvia Path",
         "tag": "",
         "publisher": "",
-        "year": ""
+        "year": "",
+        "coverSrc": ""
       },
       {
         "title": "Sofia",
         "tag": "",
         "publisher": "",
-        "year": ""
+        "year": "",
+        "coverSrc": ""
       },
       {
         "title": "The Apartment We Won't Share",
         "tag": "",
         "publisher": "",
-        "year": ""
+        "year": "",
+        "coverSrc": ""
       },
       {
         "title": "You'll Be In My Heart",
         "tag": "",
         "publisher": "",
-        "year": ""
+        "year": "",
+        "coverSrc": ""
       }
     ];
 
+    // ========== Books Table ========== //
     const tbody = document.getElementById("tbody-books");
 
     // Populate the table body
@@ -116,6 +125,10 @@
       const year = document.createElement("td");
       year.textContent = BOOKS[i].year;
 
+      row.dataset.title = BOOKS[i].title;
+      row.dataset.src = BOOKS[i].coverSrc;
+      row.dataset.alt = "Book cover of " + BOOKS[i].title;
+
       row.appendChild(title);
       row.appendChild(tag);
       row.appendChild(publisher);
@@ -128,17 +141,22 @@
     const popup = document.getElementById("purchase-popup");
     let isPurchasePopupVisible = false;
 
-    // Hide the purchase popup
-    popup.classList.add("hidden");
-
-    function showPurchasePopup() {
+    function showPurchasePopup(e) {
       if (isPurchasePopupVisible) return;
 
       main.classList.add("blur");
       popup.classList.remove("hidden");
       isPurchasePopupVisible = true;
 
-      // console.log(e.target.parentElement.rowIndex);
+      const clickedRow = e.target.closest("tr");
+      if (!clickedRow) return;
+
+      // Update the popup with the clicked product details
+      document.getElementById("purchase-popup-product-name").innerHTML = clickedRow.dataset.title;
+
+      const productCover = document.getElementById("purchase-popup-product-cover");
+      productCover.src = clickedRow.dataset.src;
+      productCover.alt = clickedRow.dataset.alt;
     }
 
     tbody.addEventListener("click", showPurchasePopup);
@@ -149,6 +167,36 @@
       popup.classList.add("hidden");
       isPurchasePopupVisible = false;
     });
+
+    // ========== Purchase Popup ========== //
+    var purchaseAmount = 1;
+    const MIN_PURCHASE_AMOUNT = 1;
+    const MAX_PURCHASE_AMOUNT = 10;
+
+
+    function updatePurchaseAmount(id) {
+        document.getElementById(id).innerHTML = purchaseAmount;
+    }
+
+    function increasePurchaseAmountBy(value) {
+        purchaseAmount += value;
+        // Clamp the purchase amount
+        purchaseAmount = Math.min(Math.max(purchaseAmount, MIN_PURCHASE_AMOUNT), MAX_PURCHASE_AMOUNT);
+    }
+
+    function onClickHandler(value) {
+        // Apply increase or decrease
+        increasePurchaseAmountBy(value);
+
+        // Update the purchase amount on the site
+        updatePurchaseAmount("purchase-quantity");
+    }
+
+    // Set the initial purchase quantity
+    updatePurchaseAmount("purchase-quantity");
+
+    document.getElementById("decrease-button").addEventListener("click", (e) => {onClickHandler(-1)});
+    document.getElementById("increase-button").addEventListener("click", (e) => {onClickHandler(1)});
 
   </script>
 
