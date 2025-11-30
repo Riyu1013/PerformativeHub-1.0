@@ -29,24 +29,18 @@
       <thead>
         <tr><td>Title</td><td>Artist</td></tr>
       </thead>
-      <tbody class="table-group-divider" id="song-info">
-        <tr data-album-cover="../media/clairo.png" data-audio-src="../media/clairo-bags.mp3"><td>Bags</td><td>Clairo</td></tr>
-        <tr data-album-cover="../media/clairo.png" data-audio-src="../media/clairo-sofia.mp3"><td>Sofia</td><td>Clairo</td></tr>
-        <tr data-album-cover="../media/niki.png" data-audio-src="../media/niki-the apartment we wont share.mp3"><td>The Apartment We Won't Share</td><td>Niki</td></tr>
-        <tr data-album-cover="../media/mitski.jpg" data-audio-src="../media/mitski-i bet on losing dogs.mp3"><td>I Bet On Losing Dogs</td><td>Mitski</td></tr>
-        <tr data-album-cover="../media/phoebe bridgers.jpg" data-audio-src="../media/phoebe bridgers-waiting room.mp3"><td>Waiting Room</td><td>Phoebe Bridgers</td></tr>
-        <tr data-album-cover="../media/olivia dean.jpg" data-audio-src="../media/olivia dean-dive.mp3"><td>Dive</td><td>Olivia Dean</td></tr>
-      </tbody>
+      <tbody class="table-group-divider" id="tbody-songs"></tbody>
     </table>
   </div>
 
   <div id="vinyl-container">
-      <img src="../media/black-vinyl-record-with-red-label-illustration-png.png" alt="Vinyl Record" id="vinyl-record">
+      <img src="../media/songs/black-vinyl-record-with-red-label-illustration-png.png" alt="Vinyl Record" id="vinyl-record">
   </div>
+  <input type="range" min="0" max="1" step="0.01" id="volume">
 
 </div>
 
-<audio id="audio-player" style="display: none;"></audio>
+<audio id="audio-player"></audio>
 
 <footer id="footer">
   <div class="footer-brand">
@@ -87,11 +81,72 @@
 
 <script>
   const SONGS = [
-    
+    {
+      "title": "Bags",
+      "artist": "Clairo",
+      "coverFilename": "clairo.png",
+      "audioFilename": "clairo-bags.mp3"
+    },
+    {
+      "title": "Sofia",
+      "artist": "Clairo",
+      "coverFilename": "clairo.png",
+      "audioFilename": "clairo-sofia.mp3"
+    },
+    {
+      "title": "The Apartment We Won't Share",
+      "artist": "Niki",
+      "coverFilename": "niki.png",
+      "audioFilename": "niki-the-apartment-we-wont-share.mp3"
+    },
+    {
+      "title": "I Bet On Losing Dogs",
+      "artist": "Mitski",
+      "coverFilename": "mitski.jpg",
+      "audioFilename": "mitski-i-bet-on-losing-dogs.mp3"
+    },
+    {
+      "title": "Waiting Room",
+      "artist": "Phoebe Bridgers",
+      "coverFilename": "phoebe-bridgers.jpg",
+      "audioFilename": "phoebe-bridgers-waiting-room.mp3"
+    },
+    {
+      "title": "Olivia Dean",
+      "artist": "Dive",
+      "coverFilename": "olivia-dean.jpg",
+      "audioFilename": "olivia-dean-dive.mp3"
+    },
   ]
 
+  // Populate the music table
+  const tbody = document.getElementById("tbody-songs");
 
-  //  Cursor
+  // Populate the table body
+  for (let i = 0; i < SONGS.length; i++) {
+    const song = SONGS[i];
+
+    const row = document.createElement("tr");
+
+    const title = document.createElement("td");
+    title.textContent = song.title;
+
+    const artist = document.createElement("td");
+    artist.textContent = song.artist;
+
+    row.dataset.title = song.title;
+    row.dataset.artist = song.artist;
+    row.dataset.coverSrc = "../media/songs/covers/" + song.coverFilename;
+    row.dataset.audioSrc = "../media/songs/audio/" + song.audioFilename;
+    row.dataset.id = "song-" + i;
+    row.appendChild(title);
+    row.appendChild(artist);
+
+    tbody.appendChild(row);
+  }
+
+
+  // Cursor
   const cursor = document.getElementById("cursor")
   const footer = document.getElementById("footer")
   footer.addEventListener("mousemove", (e) => {
@@ -102,66 +157,60 @@
   });
   footer.addEventListener("mouseleave", (e) => {
     document.body.style.cursor="default";
-  })
+  });
 
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const songTableBody = document.getElementById('song-info');
-            const vinylContainer = document.getElementById('vinyl-container');
-            const audioPlayer = document.getElementById('audio-player');
-            const body = document.body; // Reference to the body 
+  const vinylContainer = document.getElementById('vinyl-container');
+  const audioPlayer = document.getElementById('audio-player');
 
-            function displayAlbumCover(imageUrl) {
-                let cover = document.getElementById('album-cover-img');
+  const cover = document.createElement("img");
+  cover.id = "album-cover-img";
+  cover.classList.add("album-cover");
+  vinylContainer.appendChild(cover);
 
-                if (!cover) {
-                    // Create the element if it doesn't exist
-                    cover = document.createElement('img');
-                    cover.id = 'album-cover-img';
-                    // The album-cover class has the necessary positioning and sizing
-                    cover.classList.add('album-cover');
-                    vinylContainer.appendChild(cover);
-                }
-                
-                // Set the new image source
-                cover.src = imageUrl;
-            }
+  // function updateVinylCover() {
 
-            songTableBody.addEventListener("click", (e) => {
-                const clickedRow = e.target.closest('tr');
-                
-                if (clickedRow) {
-                    const albumCover = clickedRow.dataset.albumCover; 
-                    const audioSrc = clickedRow.dataset.audioSrc;     
+  // }
 
+  
+  tbody.addEventListener("click", (e) => {
+    const clickedRow = e.target.closest('tr');
+    
+    if (clickedRow) {
+      const albumCover = clickedRow.dataset.coverSrc; 
+      const audioSrc = clickedRow.dataset.audioSrc;     
 
-                    // 2. Stop current playback and reset state
-                    audioPlayer.pause();
-                    audioPlayer.currentTime = 0;
-                    body.classList.remove('is-playing'); // Remove spinning/visible class
+      // 2. Stop current playback and reset state
+      audioPlayer.pause();
+      audioPlayer.currentTime = 0;
 
-                    // 3. Execution Sequence 
-                    
-                    // Put the album cover on top of the vinyl
-                    displayAlbumCover(albumCover);
-                    
-                    // Start the song playing
-                    audioPlayer.src = audioSrc;
-                    
-                    setTimeout(() => {
-                        vinylContainer.classList.add('is-playing'); // This starts the CSS animation and fades in the cover
-                        
-                        audioPlayer.play()
-                            .then(() => {
-                                console.log(`Now playing: ${clickedRow.firstElementChild.textContent}`);
-                            })
-                            .catch(error => {
-                                console.error("Audio playback failed. NOTE: HTML <audio> cannot play YouTube links. Use direct audio files (.mp3, .wav).", error);
-                            });
-                    }, 100); 
-                }
-            });
-        });
+      // 3. Execution Sequence 
+      
+      // Put the album cover on top of the vinyl
+      cover.src = clickedRow.dataset.coverSrc;
+      
+      // Start the song playing
+      audioPlayer.src = audioSrc;
+
+      const slider = document.getElementById("volume");
+
+      slider.addEventListener("input", () => {
+        audioPlayer.volume = slider.value;
+      });
+      
+      setTimeout(() => {
+        vinylContainer.classList.add('is-playing'); // This starts the CSS animation and fades in the cover
+        
+        audioPlayer.play()
+        //   .then(() => {
+        //       console.log(`Now playing: ${clickedRow.firstElementChild.textContent}`);
+        //   })
+        //   .catch(error => {
+        //       console.error("Audio playback failed. NOTE: HTML <audio> cannot play YouTube links. Use direct audio files (.mp3, .wav).", error);
+        // });
+      }, 100); 
+    }
+  });
 </script>
 
 <!-- Global JS -->
