@@ -16,76 +16,106 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg bg-body" id="my-nav">
-  <div class="container-fluid">
-    <div class="brand-wrapper">
-      <a class="navbar-brand" id="hero-text.shrink" href="../index.html">Performative <br> Website</a>
+  <nav class="navbar navbar-expand-lg bg-body" id="my-nav">
+    <div class="container-fluid">
+      <div class="brand-wrapper">
+        <a class="navbar-brand" id="hero-text.shrink" href="../index.html">Performative <br> Website</a>
+      </div>
+      <div class="nav-item">
+        <a class="justify-content-end fs-5" href="about.html">About, </a>
+        <a class="justify-content-end fs-5" href="contact.html">Contact, </a>
+        <a class="justify-content-end fs-5" href="">Cart</a>
+      </div>
     </div>
-    <div class="nav-item">
-      <a class="justify-content-end fs-5" href="about.html">About, </a>
-      <a class="justify-content-end fs-5" href="contact.html">Contact, </a>
-      <a class="justify-content-end fs-5" href="">Cart</a>
-    </div>
+  </nav>
+
+  <div class="container-fluid m-5">
+      <p class="fs-2 text-start ms-3 mb-0">Movies</p>
+      <div class="d-flex flex-wrap align-content-start" id="movie-container"></div>
   </div>
-</nav>
+  <footer>
+    <div class="footer-brand">
+      <h1>DON'T MISS NEW ITEMS</h1>
 
-<div class="container-fluid m-5">
-    <p class="fs-2 text-start ms-3 mb-0">Movies</p>
-    <div class="d-flex flex-wrap align-content-start" id="movie-container"></div>
-</div>
+      <form class="w-100 m-0">
+        <div class="row g-3">
+          <div class="col-md-10">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email">
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary">Go</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-info">
+        <h4>You Can Find Us</h4>
+        <p>performative@gmail.com</p>
+        <p>+12 345 6789</p>
+        <p>Governor Pack Road, Baguio City, 2600, Benguet, Philippines</p>
+      </div>
+      <div class="footer-faq">
+        <h4>We Will Always Help</h4>
+        <p>Terms and Conditions</p>
+        <p>Privacy Policy</p>
+        <p>Cookies</p>
+        <p>Shipping & Returns</p>
+      </div>
+    </div>
+  </footer>
+  <script>
+      const MOVIES = [
+          {
+              "title": "Good Will Hunting",
+              "posterFilename": "good-will-hunting.jpg"
+          },
+          {
+              "title": "Aftersun",
+              "posterFilename": "aftersun.jpg"
+          },
+          {
+              "title": "Dead Poet's Society",
+              "posterFilename": "dead-poets-society.jpg"
+          },
+          {
+              "title": "Moonlight",
+              "posterFilename": "moonlight.jpg"
+          },
+          {
+              "title": "Perks of Being a Wallflower",
+              "posterFilename": "perks-of-being-a-wallflower.jpg"
+          },
+          {
+              "title": "",
+              "posterFilename": ""
+          },
+          {
+              "title": "",
+              "posterFilename": ""
+          },
+          {
+              "title": "",
+              "posterFilename": ""
+          },
+      ];
 
-<script>
-    const MOVIES = [
-        {
-            "title": "Good Will Hunting",
-            "posterFilename": "good-will-hunting.jpg"
-        },
-        {
-            "title": "Aftersun",
-            "posterFilename": "aftersun.jpg"
-        },
-        {
-            "title": "Dead Poet's Society",
-            "posterFilename": "dead-poets-society.jpg"
-        },
-        {
-            "title": "Moonlight",
-            "posterFilename": "moonlight.jpg"
-        },
-        {
-            "title": "Perks of Being a Wallflower",
-            "posterFilename": "perks-of-being-a-wallflower.jpg"
-        },
-        {
-            "title": "",
-            "posterFilename": ""
-        },
-        {
-            "title": "",
-            "posterFilename": ""
-        },
-        {
-            "title": "",
-            "posterFilename": ""
-        },
-    ];
 
+      let movieContainer = document.getElementById("movie-container");
 
-    let movieContainer = document.getElementById("movie-container");
+      // Populate the movies container
+      for (let movie of MOVIES) {
+          let container = document.createElement("div");
+          container.classList.add("movie-item");
+          container.dataset.title = movie.title;
 
-    // Populate the movies container
-    for (let movie of MOVIES) {
-        let container = document.createElement("div");
-        container.classList.add("movie-item");
-        container.dataset.title = movie.title;
+          let poster = document.createElement("img");
+          poster.src = "../media/movies/" + movie.posterFilename;
+          poster.alt = "Poster of " + movie.title;
 
-        let poster = document.createElement("img");
-        poster.src = "../media/movies/" + movie.posterFilename;
-        poster.alt = "Poster of " + movie.title;
-
-        container.appendChild(poster);
-        movieContainer.appendChild(container);
-    }
-</script>
+          container.appendChild(poster);
+          movieContainer.appendChild(container);
+      }
+  </script>
 </body>
 </html>

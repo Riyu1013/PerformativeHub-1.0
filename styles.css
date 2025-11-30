@@ -63,12 +63,12 @@
 }
 
 #main-content{
-    transition: filter 0.8s ease-in-out;
+  transition: filter 0.8s ease-in-out;
 }
 
 .my-carousel{
   margin-top:1.5em;
-  height: 100%;
+  height: 82vh;
   border: 1px solid none;
   display: flex;
   overflow-x: scroll;
@@ -86,8 +86,8 @@
 }
 .my-carousel .item img{
     width: 100%;
-    height: 50%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
 }
 
 .my-carousel .item{
@@ -103,6 +103,64 @@
   filter: blur(30px);
   transition: filter 0.5s ease;
 }
+
+#scrollingCanvas {
+    /* position: fixed; */
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 7%;
+    z-index: 9999;
+    display: block;
+}
+
+footer{
+  background-color:black;
+  height:100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+}
+
+footer h1{
+  font-family: 'OpenSauceBold';
+  font-size: 5rem;
+}
+
+.footer-brand{
+  padding: 5%;
+  flex:1 1 50%;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  gap: 2em;
+}
+
+.footer-brand h1{
+  color: white;
+}
+
+.footer-nav{
+  flex: 1 1 50%;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5%;
+}
+
+.footer-nav h4{
+  font-family: 'OpenSauceBold';
+  color: white;
+}
+
+.footer-nav p{
+  margin: 0%;
+  color: white;
+}
+
 
 /* Start of MoviePage css */
 .movie-item {
@@ -271,17 +329,6 @@
   height: 100%l;
   background: #ccc;
 }
-
-
-#scrollingCanvas {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    z-index: 9999;
-    display: block;
-}
-
 
 /* DRINK.HTML */
 .drink-selection{
