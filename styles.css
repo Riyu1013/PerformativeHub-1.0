@@ -224,6 +224,75 @@
     to { transform: rotate(360deg); }
 }
 
+/* End of Music Page */
+.labubu-container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.labubu-carousel {
+  height: 100vh;
+}
+
+.img-box {
+  position: absolute;
+  bottom: -960px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 1600px;
+  height: 1600px;
+}
+
+.img-box .img-list {
+  height: inherit;
+  transform: rotate(90deg);
+}
+
+.img-list .img-slider {
+  height: inherit;
+  display: flex;
+  align-items: center;
+  transition: .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.img-slider .img-item {
+  position: absolute;
+  left: 0;
+  transform: rotate(calc(360deg/4 * var(--i)));
+  transform-origin: 800px;
+}
+
+.img-item img {
+  transform: rotate(-90deg);
+  filter: drop-shadow(0 0 10px rgba(0,0,0,.1));
+  height: 30rem;
+  width: 30rem;
+}
+
+.navigation {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 100;
+}
+
+.navigation span {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  background: rgba(255,255,255,.2);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 55px;
+
+}
 
 
 #scrollingCanvas {

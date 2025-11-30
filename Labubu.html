@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- Bootstrap JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body" id="my-nav">
+        <div class="container-fluid">
+            <div class="brand-wrapper">
+                <a class="navbar-brand" id="hero-text.shrink" href="#">Performative <br> Website</a>
+            </div>
+            <div class="nav-item">
+                <a class="justify-content-end fs-5" href="">About</a>
+            </div>
+        </div>
+    </nav>
+<div class="labubu-container">
+    <div class="labubu-carousel">
+        <div class="img-box">
+            <div class="img-list">
+                <div class="img-slider">
+                    <div class="img-item" style="--i:0;">
+                        <img src="media/labubu1.webp">
+                    </div>
+                    <div class="img-item" style="--i:1;">
+                        <img src="media/labubu2.jpg">
+                    </div>
+                    <div class="img-item" style="--i:2;">
+                        <img src="media/labubu3.webp">
+                    </div>
+                    <div class="img-item" style="--i:3;">
+                        <img src="media/labubu4.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navigation">
+            <span class="prev-btn">
+                <button type="button" class="btn btn-primary">Prev</button>  
+            </span>
+            <span class="next-btn">
+                <button type="button" class="btn btn-primary">Next</button>
+            </span>
+        </div>
+    </div>  
+</div> 
+</body>
+</html>
+
+<script>
+    const imgSlider = document.querySelector('.img-slider');
+    const nextBtn = document.querySelector('.next-btn');
+    const prevBtn = document.querySelector('.prev-btn');
+
+    let indexSlider = 0;
+
+    nextBtn.addEventListener('click', () => {
+        indexSlider++;
+        imgSlider.style.transform = `rotate(${indexSlider * -90}deg)`;
+    });
+
+    prevBtn.addEventListener('click', () => {
+        indexSlider--;
+        imgSlider.style.transform = `rotate(${indexSlider * -90}deg)`;
+    });
+</script>
