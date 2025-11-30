@@ -28,29 +28,64 @@
     </div>
   </div>
 </nav>
-<div class="movie-body">
-    <div id="description">
-        <h1>Movies</h1>
-    </div>
 
-    <div class="movie-container">
-        <div class="movie-item"> <img src="../media/mov1.jpg"> </div>
-        <div class="movie-item"> <img src="../media/mov2.webp"> </div>
-        <div class="movie-item"> <img src="../media/mov3.webp"> </div>
-        <div class="movie-item"> <img src="../media/mov4.webp"> </div>
-        <div class="movie-item"> <img src="../media/mov5.jpg"> </div>
-        <div class="movie-item"> <img src="../media/mov6.jpg"> </div>
-        <div class="movie-item"> <img src="../media/mov7.jpg"> </div>
-        <div class="movie-item"> <img src="../media/mov8.png"></div>
-        <div class="movie-item"> <img src="../media/mov9.webp"> </div>
-        <div class="movie-item"> <img src="../media/mov10.jpg"> </div>
-        <div class="movie-item"> <img src="../media/mov11.jpg"> </div>
-        <div class="movie-item"> <img src="../media/mov12.webp"> </div>
-        <div class="movie-item"> <img src="../media/mov13.jpg"> </div>
-        <div class="movie-item"> <img src="../media/mov14.jpg"> </div>
-        <div class="movie-item"> <img src="../media/mov15.webp"> </div>
-    </div>
+<div class="container-fluid m-5">
+    <p class="fs-2 text-start ms-3 mb-0">Movies</p>
+    <div class="d-flex flex-wrap align-content-start" id="movie-container"></div>
 </div>
-</body>
 
+<script>
+    const MOVIES = [
+        {
+            "title": "Good Will Hunting",
+            "posterFilename": "good-will-hunting.jpg"
+        },
+        {
+            "title": "Aftersun",
+            "posterFilename": "aftersun.jpg"
+        },
+        {
+            "title": "Dead Poet's Society",
+            "posterFilename": "dead-poets-society.jpg"
+        },
+        {
+            "title": "Moonlight",
+            "posterFilename": "moonlight.jpg"
+        },
+        {
+            "title": "Perks of Being a Wallflower",
+            "posterFilename": "perks-of-being-a-wallflower.jpg"
+        },
+        {
+            "title": "",
+            "posterFilename": ""
+        },
+        {
+            "title": "",
+            "posterFilename": ""
+        },
+        {
+            "title": "",
+            "posterFilename": ""
+        },
+    ];
+
+
+    let movieContainer = document.getElementById("movie-container");
+
+    // Populate the movies container
+    for (let movie of MOVIES) {
+        let container = document.createElement("div");
+        container.classList.add("movie-item");
+        container.dataset.title = movie.title;
+
+        let poster = document.createElement("img");
+        poster.src = "../media/movies/" + movie.posterFilename;
+        poster.alt = "Poster of " + movie.title;
+
+        container.appendChild(poster);
+        movieContainer.appendChild(container);
+    }
+</script>
+</body>
 </html>
