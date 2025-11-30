@@ -37,36 +37,40 @@
           <tr>
             <th>Title</th>
             <th>Tag</th>
-            <th>Publisher</th>
+            <th>Author</th>
             <th>Year</th>
           </tr>
         </thead>
-        <tbody class="table-group-divider" id="tbody-books">
-        </tbody>
+        <tbody class="table-group-divider" id="tbody-books"></tbody>
       </table>
     </div>
 
-    <div class="card mb-3 hidden" style="max-width: 540px;" id="purchase-popup">
+    <div class="card hidden" style="max-width: 34rem;" id="purchase-popup">
       <button type="button" class="btn-close" aria-label="Close" id=button-close-purchase-popup></button>
       <div class="row g-0">
         <div class="col-md-4">
-          <img src="" class="img-fluid rounded-start" alt="" id="purchase-popup-product-cover">
+          <div class="container-fluid ml-2 mb-2">
+            <img src="" class="img-fluid rounded" alt="" id="purchase-popup-product-cover">
+          </div>
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title" id="purchase-popup-product-name">Product Name</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <div class="d-flex align-items-center" id="purchase-popup-quantity-group">
-              <div class="pr-2 flex-fill border">Quantity</div>
-              <div class="flex-fill border">
-                <p class="text-center fs-3" id="purchase-quantity">#</p>
+            <h4 class="card-title mb-0" id="purchase-popup-product-name">Product Name</h4>
+            <p class="card-text mb-0" id="purchase-popup-product-author">By Author</p>
+            <hr class="mt-2 mb-2">
+            <p class="card-text mb-0" id="purchase-popup-product-tag">Tag</p>
+            <hr class="mt-2 mb-2">
+            <div class="d-flex align-items-center justify-content-evenly mb-3" id="purchase-popup-quantity-group">
+              <div class="">Quantity</div>
+              <p class="text-center fs-3 mb-0" id="purchase-quantity">#</p>
+              <div class="d-grid gap-2 d-md-block">
+                <button class="btn btn-secondary" type="button" id="decrease-button"> - </button>
+                <button class="btn btn-secondary" type="button" id="increase-button"> + </button>
               </div>
-                <div class="d-grid gap-2 d-md-block pl-2 flex-fill border">
-                  <button class="btn btn-primary" type="button" id="decrease-button"> - </button>
-                  <button class="btn btn-primary" type="button" id="increase-button"> + </button>
-                </div>
             </div>
-            <button class="btn btn-primary" type="button">Add To Cart</button>
+            <div class="d-flex justify-content-center">
+              <button class="btn btn-primary" type="button"> <i class="bi bi-cart"></i>Add To Cart</button>
+            </div>
           </div>
         </div>
       </div>
@@ -125,32 +129,144 @@
     // Add books here following the given format
     const BOOKS = [
       {
-        "title": "Sylvia Path",
-        "tag": "",
-        "publisher": "",
-        "year": "",
-        "coverSrc": ""
+        "title": "Infinite Jest",
+        "tag": "Philosophical Fiction",
+        "author": "David Foster Wallace",
+        "year": 1996,
+        "coverFilename": "infinite-jest.jpg"
       },
       {
-        "title": "Sofia",
-        "tag": "",
-        "publisher": "",
-        "year": "",
-        "coverSrc": ""
+        "title": "The Stranger",
+        "tag": "Existentialism",
+        "author": "Albert Camus",
+        "year": 1942,
+        "coverFilename": "the-stranger.jpg"
       },
       {
-        "title": "The Apartment We Won't Share",
-        "tag": "",
-        "publisher": "",
-        "year": "",
-        "coverSrc": ""
+        "title": "Thus Spoke Zarathustra",
+        "tag": "Philosophy",
+        "author": "Friedrich Nietzsche",
+        "year": 1883,
+        "coverFilename": "thus-spoke-zarathustra.jpg"
       },
       {
-        "title": "You'll Be In My Heart",
-        "tag": "",
-        "publisher": "",
-        "year": "",
-        "coverSrc": ""
+        "title": "Meditations",
+        "tag": "Stoic Philosophy",
+        "author": "Marcus Aurelius",
+        "year": 2003,
+        "coverFilename": "meditations.jpg"
+      },
+      {
+        "title": "The Brothers Karamazov",
+        "tag": "Classic Literature",
+        "author": "Fyodor Dostoevsky",
+        "year": 1880,
+        "coverFilename": "the-brothers-karamazov.jpg"
+      },
+      {
+        "title": "Blood Meridian",
+        "tag": "Gritty Literature",
+        "author": "Cormac McCarthy",
+        "year": 1985,
+        "coverFilename": "blood-meridian.jpg"
+      },
+      {
+        "title": "The Road",
+        "tag": "Post-Apocalyptic Fiction",
+        "author": "Cormac McCarthy",
+        "year": 2006,
+        "coverFilename": "the-road.jpg"
+      },
+      {
+        "title": "American Psycho",
+        "tag": "Satire / Hyper-Masculine Critique",
+        "author": "Bret Easton Ellis",
+        "year": 1991,
+        "coverFilename": "american-psycho.png"
+      },
+      {
+        "title": "Fight Club",
+        "tag": "Dark Satire",
+        "author": "Chuck Palahniuk",
+        "year": 1996,
+        "coverFilename": ""
+      },
+      {
+        "title": "The Old Man and the Sea",
+        "tag": "Classic Masculinity",
+        "author": "Ernest Hemingway",
+        "year": 1952,
+        "coverFilename": ""
+      },
+      {
+        "title": "The 48 Laws of Power",
+        "tag": "Self-Help / Strategy",
+        "author": "Robert Greene",
+        "year": 1998,
+        "coverFilename": ""
+      },
+      {
+        "title": "Atomic Habits",
+        "tag": "Self-Improvement",
+        "author": "James Clear",
+        "year": 2018,
+        "coverFilename": ""
+      },
+      {
+        "title": "Can't Hurt Me",
+        "tag": "Grit / Self-Help",
+        "author": "David Goggins",
+        "year": 2018,
+        "coverFilename": ""
+      },
+      {
+        "title": "The Art of War",
+        "tag": "Strategy",
+        "author": "Sun Tzu",
+        "year": 1963,
+        "coverFilename": ""
+      },
+      {
+        "title": "Sapiens",
+        "tag": "Pop Nonfiction / Anthropology Flex",
+        "author": "Yuval Noah Harari",
+        "year": 2014,
+        "coverFilename": ""
+      },
+      {
+        "title": "Zero to One",
+        "tag": "Startup / Business",
+        "author": "Peter Thiel",
+        "year": 2014,
+        "coverFilename": ""
+      },
+      {
+        "title": "Gödel, Escher, Bach",
+        "tag": "Intellectual Flex / Math-Philosophy",
+        "author": "Douglas Hofstadter",
+        "year": 1979,
+        "coverFilename": ""
+      },
+      {
+        "title": "1984",
+        "tag": "Classic Dystopia",
+        "author": "George Orwell",
+        "year": 1949,
+        "coverFilename": ""
+      },
+      {
+        "title": "On the Road",
+        "tag": "Beat Literature",
+        "author": "Jack Kerouac",
+        "year": 1957,
+        "coverFilename": ""
+      },
+      {
+        "title": "Slaughterhouse-Five",
+        "tag": "Anti-War Literature",
+        "author": "Kurt Vonnegut",
+        "year": 1969,
+        "coverFilename": ""
       }
     ];
 
@@ -167,19 +283,21 @@
       const tag = document.createElement("td");
       tag.textContent = BOOKS[i].tag;
 
-      const publisher = document.createElement("td");
-      publisher.textContent = BOOKS[i].publisher;
+      const author = document.createElement("td");
+      author.textContent = BOOKS[i].author;
 
       const year = document.createElement("td");
       year.textContent = BOOKS[i].year;
 
       row.dataset.title = BOOKS[i].title;
-      row.dataset.src = BOOKS[i].coverSrc;
+      row.dataset.tag = BOOKS[i].tag;
+      row.dataset.author = BOOKS[i].author;
+      row.dataset.src = "../media/books/" + BOOKS[i].coverFilename;
       row.dataset.alt = "Book cover of " + BOOKS[i].title;
 
       row.appendChild(title);
       row.appendChild(tag);
-      row.appendChild(publisher);
+      row.appendChild(author);
       row.appendChild(year);
 
       tbody.appendChild(row);
@@ -200,11 +318,13 @@
       if (!clickedRow) return;
 
       // Update the popup with the clicked product details
-      document.getElementById("purchase-popup-product-name").innerHTML = clickedRow.dataset.title;
-
       const productCover = document.getElementById("purchase-popup-product-cover");
       productCover.src = clickedRow.dataset.src;
       productCover.alt = clickedRow.dataset.alt;
+
+      document.getElementById("purchase-popup-product-name").innerHTML = clickedRow.dataset.title;
+      document.getElementById("purchase-popup-product-tag").innerHTML = clickedRow.dataset.tag;
+      document.getElementById("purchase-popup-product-author").innerHTML = clickedRow.dataset.author;
     }
 
     tbody.addEventListener("click", showPurchasePopup);
