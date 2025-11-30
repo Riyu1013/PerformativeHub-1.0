@@ -28,11 +28,40 @@
     </div>
   </nav>
 
-  <div id="books-container">
+  <div class="row mt-5" id="books-container">
+    <!-- Book Preview -->
+    <div class="col-lg-4 d-flex flex-column align-items-center">
+      <div class="w-50 mb-2">
+        <button type="button" class="btn-close visually-hidden" id="button-clear-preview" aria-label="Close"></button>
+        <img class="img-fluid border rounded" id="cover">
+      </div>
 
-    <div class="container-fluid" id="main">
-      <h2 class="mt-5">Books</h2>
-      <table class="table table-hover" id="table-books">
+      <!-- Purchase Control -->
+      <div class="w-50 text-center visually-hidden" id="book-purchase-control">
+        <h4 class="mb-0" id="title">Title</h4>
+        <p class="mb-0" id="author">By Author</p>
+        <hr class="mx-auto my-2">
+        <p class="mb-0" id="tag">Tag</p>
+        <hr class="mx-auto my-2">
+        <div class="d-flex align-items-center justify-content-evenly mb-3" id="purchase-popup-quantity-group">
+          <div class="">Quantity</div>
+          <p class="text-center fs-3 mb-0" id="purchase-quantity">1</p>
+          <div class="d-grid gap-2 d-md-block">
+            <button class="btn btn-secondary" type="button" id="decrease-button"> - </button>
+            <button class="btn btn-secondary" type="button" id="increase-button"> + </button>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button class="btn btn-primary" type="button">Add To Cart</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Books table -->
+    <div class="col-lg-8" id="books-table-container">
+      <h2>Books</h2>
+      <table class="table table-hover" id="books-table">
         <thead>
           <tr>
             <th>Title</th>
@@ -44,38 +73,6 @@
         <tbody class="table-group-divider" id="tbody-books"></tbody>
       </table>
     </div>
-
-    <div class="card hidden" style="max-width: 34rem;" id="purchase-popup">
-      <button type="button" class="btn-close" aria-label="Close" id=button-close-purchase-popup></button>
-      <div class="row g-0">
-        <div class="col-md-4">
-          <div class="container-fluid ml-2 mb-2">
-            <img src="" class="img-fluid rounded" alt="" id="purchase-popup-product-cover">
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h4 class="card-title mb-0" id="purchase-popup-product-name">Product Name</h4>
-            <p class="card-text mb-0" id="purchase-popup-product-author">By Author</p>
-            <hr class="mt-2 mb-2">
-            <p class="card-text mb-0" id="purchase-popup-product-tag">Tag</p>
-            <hr class="mt-2 mb-2">
-            <div class="d-flex align-items-center justify-content-evenly mb-3" id="purchase-popup-quantity-group">
-              <div class="">Quantity</div>
-              <p class="text-center fs-3 mb-0" id="purchase-quantity">#</p>
-              <div class="d-grid gap-2 d-md-block">
-                <button class="btn btn-secondary" type="button" id="decrease-button"> - </button>
-                <button class="btn btn-secondary" type="button" id="increase-button"> + </button>
-              </div>
-            </div>
-            <div class="d-flex justify-content-center">
-              <button class="btn btn-primary" type="button"> <i class="bi bi-cart"></i>Add To Cart</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
   </div>
 
 
@@ -257,69 +254,91 @@
       tbody.appendChild(row);
     }
     
-    const main = document.getElementById("main");
-    const popup = document.getElementById("purchase-popup");
-    let isPurchasePopupVisible = false;
+    let hasBookSelected = false;
+    let currentActiveRow = null;
 
-    function showPurchasePopup(e) {
-      if (isPurchasePopupVisible) return;
+    // Get the rows of the table
+    const table = document.getElementById("books-table");
+    const rows = table.querySelectorAll("tbody tr");
 
-      main.classList.add("blur");
-      popup.classList.remove("hidden");
-      isPurchasePopupVisible = true;
+    const purchaseControl = document.getElementById("book-purchase-control");
+    const clearPreviewButton = document.getElementById("button-clear-preview");
 
-      const clickedRow = e.target.closest("tr");
-      if (!clickedRow) return;
+    function updateBookPreview(row) {
+      const cover = document.getElementById("cover");
+      cover.src = row.dataset.src;
+      cover.alt = row.dataset.alt;
 
-      // Update the popup with the clicked product details
-      const productCover = document.getElementById("purchase-popup-product-cover");
-      productCover.src = clickedRow.dataset.src;
-      productCover.alt = clickedRow.dataset.alt;
-
-      document.getElementById("purchase-popup-product-name").innerHTML = clickedRow.dataset.title;
-      document.getElementById("purchase-popup-product-tag").innerHTML = clickedRow.dataset.tag;
-      document.getElementById("purchase-popup-product-author").innerHTML = clickedRow.dataset.author;
+      document.getElementById("title").innerHTML = row.dataset.title;
+      document.getElementById("tag").innerHTML = row.dataset.tag;
+      document.getElementById("author").innerHTML = row.dataset.author;
     }
 
-    tbody.addEventListener("click", showPurchasePopup);
+    function clearCurrentlyActiveRow() {
+      currentActiveRow.classList.remove("table-active");
+    }
 
-    // Attach functionality to the close button
-    document.getElementById("button-close-purchase-popup").addEventListener("click", (e) => {
-      main.classList.remove("blur");
-      popup.classList.add("hidden");
-      isPurchasePopupVisible = false;
+    function resetBookPreview() {
+      clearCurrentlyActiveRow();
+    }
+
+    // Add hover detection to each row
+    rows.forEach(row => {
+      row.addEventListener("mouseenter", () => {
+        if (!hasBookSelected) updateBookPreview(row);
+      });
+
+      row.addEventListener("click", () => {
+        // Clear the previously active row
+        if (currentActiveRow) {
+          clearCurrentlyActiveRow();
+        }
+
+        row.classList.add("table-active");
+        currentActiveRow = row;
+        hasBookSelected = true;
+
+        purchaseControl.classList.remove("visually-hidden");
+        clearPreviewButton.classList.remove("visually-hidden");
+
+        updateBookPreview(row);
+      });
     });
 
-    // ========== Purchase Popup ========== //
-    var purchaseAmount = 1;
+    clearPreviewButton.addEventListener("click", () => {
+      hasBookSelected = false;
+      clearCurrentlyActiveRow();
+      clearPreviewButton.classList.add("visually-hidden");
+    });
+
+    // ========== Purchase Control ========== //
     const MIN_PURCHASE_AMOUNT = 1;
     const MAX_PURCHASE_AMOUNT = 10;
+    const PURCHASE_AMOUNT_ID = "purchase-quantity";
 
 
-    function updatePurchaseAmount(id) {
-        document.getElementById(id).innerHTML = purchaseAmount;
+    function getPurchaseAmount() {
+        return document.getElementById(PURCHASE_AMOUNT_ID).innerHTML;
     }
 
-    function increasePurchaseAmountBy(value) {
+    function setPurchaseAmount(value) {
+        document.getElementById(PURCHASE_AMOUNT_ID).innerHTML = value;
+    }
+
+    function updatePurchaseAmountBy(value) {
+        let purchaseAmount = parseInt(getPurchaseAmount());
         purchaseAmount += value;
         // Clamp the purchase amount
         purchaseAmount = Math.min(Math.max(purchaseAmount, MIN_PURCHASE_AMOUNT), MAX_PURCHASE_AMOUNT);
+        setPurchaseAmount(purchaseAmount);
     }
 
     function onClickHandler(value) {
-        // Apply increase or decrease
-        increasePurchaseAmountBy(value);
-
-        // Update the purchase amount on the site
-        updatePurchaseAmount("purchase-quantity");
+        updatePurchaseAmountBy(value);
     }
-
-    // Set the initial purchase quantity
-    updatePurchaseAmount("purchase-quantity");
 
     document.getElementById("decrease-button").addEventListener("click", (e) => {onClickHandler(-1)});
     document.getElementById("increase-button").addEventListener("click", (e) => {onClickHandler(1)});
-
   </script>
 
 </body>
