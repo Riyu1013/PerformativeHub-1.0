@@ -63,6 +63,7 @@
     </div>  
 
   </div>
+
   <footer id="footer">
     <div class="footer-brand">
       <h1>DON'T MISS NEW ITEMS</h1>
@@ -94,13 +95,16 @@
       </div>
     </div>
   </footer>
+  
   <div class="cursor" id="cursor">
     <svg width="60" height="60">
       <circle cx="30" cy="30" r="20" stroke="black" stroke-width="1" fill="white"></circle>
     </svg>
-  </div>   
+  </div>
+
+
   <script>
-  //  Cursor
+   // Cursor
   const cursor = document.getElementById("cursor")
   const footer = document.getElementById("footer")
   footer.addEventListener("mousemove", (e) => {
@@ -191,7 +195,9 @@
       ];
 
 
-      let movieContainer = document.getElementById("movie-container");
+  const movieContainer = document.getElementById("movie-container");
+  const main = document.getElementById("main");
+  const popup = document.getElementById("purchase-popup");
 
   // Populate the main div (movies)
   for (let movie of MOVIES) {
@@ -292,9 +298,6 @@
   
    
 
-          container.appendChild(poster);
-          movieContainer.appendChild(container);
-      }
   </script>
 <!-- Global JS -->
 <script src="script/main.js"></script>
