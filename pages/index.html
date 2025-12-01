@@ -1,8 +1,11 @@
+<!-- HEADER BOILERPLATE -->
+<!-- Change page title -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Performative Website</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -10,20 +13,19 @@
     <!-- Bootstrap JS -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-
-
+    <!-- Bootstrap ICONS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <link rel="stylesheet" href="../styles.css">
-    
-    <title>Performative Website</title>
 </head>
+<!-- END OF HEADER BOILERPLATE -->
+
+<!-- BODY BOILERPLATE -->
 <body>
   <nav class="navbar navbar-expand-lg bg-body" id="my-nav">
     <div class="container-fluid">
       <div class="brand-wrapper">
-        <a class="navbar-brand" id="hero-text" href="#">Performative <br> Website</a>
+      <a class="navbar-brand" id="hero-text" href="index.html">Performative <br> Website</a>
       </div>
       <div class="nav-item" id="nav-item">
         <a class="justify-content-end fs-5" href="about.html">About | </a>
@@ -32,19 +34,17 @@
       </div>
     </div>
   </nav>
+  <!-- CART -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasRightLabel">Cart</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body" id="cart-items">
-
-    </div>
+    <div class="offcanvas-body" id="cart-items"></div>
   </div>
+<!-- END OF BODY BOILERPLATE -->
 
-
-
-
+<!-- PAGE CONTENTS -->
   <div id="main-content">
     <div class="my-carousel" id="my-carousel">
       <div class="item"><a href="labubu.html"> <img src="../media/labubu-1.png" alt="Labubu" class="my-image"></a></div>
@@ -56,7 +56,9 @@
   </div>
 
   <canvas id="scrollingCanvas" width="1300" height="40"></canvas>
+<!-- END OF PAGE CONTENTS -->
 
+<!-- FOOTER BOILERPLATE -->
   <footer id="footer">
     <div class="footer-brand">
       <h1>DON'T MISS NEW ITEMS</h1>
@@ -77,7 +79,7 @@
         <h4>You Can Find Us</h4>
         <p>performative@gmail.com</p>
         <p>+12 345 6789</p>
-        <p>Governor Pack Road, Baguio City, 2600, Benguet, Philippines</p>
+        <p>Governor Pack Road, Baguio City, 2600,<br>Benguet, Philippines</p>
       </div>
       <div class="footer-faq">
         <h4>We Will Always Help</h4>
@@ -93,10 +95,14 @@
     <svg width="60" height="60">
       <circle cx="30" cy="30" r="20" stroke="black" stroke-width="1" fill="white"></circle>
     </svg>
-  </div>   
-<script>
+  </div>
 
-// Scroll-drag infinite carousel vibe coded using ChatGPT <3 hehe
+  <!-- Global JS -->
+  <script src="../script/main.js"></script>
+<!-- END OF FOOTER BOILERPLATE -->
+
+  <script>
+  // Scroll-drag infinite carousel vibe coded using ChatGPT <3 hehe
   const slider = document.querySelector('.my-carousel');
   let isDown = false;
   let startX;
@@ -246,8 +252,6 @@
   }
   draw();
 
-</script>
-<!-- Global JS -->
-<script defer src="../script/main.js"></script>
+  </script>
 </body>
 </html>
