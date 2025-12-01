@@ -29,10 +29,41 @@
     </div>
   </nav>
 
-  <div class="container-fluid m-5">
-      <p class="fs-2 text-start ms-3 mb-0">Movies</p>
-      <div class="d-flex flex-wrap align-content-start" id="movie-container"></div>
+  <div id="movie-container">
+    
+    <p class="fs-2 text-start ms-3 mb-0">Movies</p>
+    <div class="d-flex flex-wrap align-content-start justify-content-center" id="main"></div>
+
+    <div class="card hidden" style="max-width: 34rem;" id="purchase-popup">
+      <button type="button" class="btn-close" aria-label="Close" id=button-close-purchase-popup></button>
+      <div class="row g-0">
+        <div class="col-md-4">
+          <div class="container-fluid ml-2 mb-2">
+            <img src="" class="img-fluid rounded" alt="" id="purchase-popup-product-cover">
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h4 class="card-title mb-0" id="purchase-popup-product-name">Product Name</h4>
+            <hr class="mt-2 mb-2">
+            <div class="d-flex align-items-center justify-content-evenly mb-3" id="purchase-popup-quantity-group">
+              <div class="">Quantity</div>
+              <p class="text-center fs-3 mb-0" id="purchase-quantity">#</p>
+              <div class="d-grid gap-2 d-md-block">
+                <button class="btn btn-secondary" type="button" id="decrease-button"> - </button>
+                <button class="btn btn-secondary" type="button" id="increase-button"> + </button>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button class="btn btn-primary" type="button" id="add-to-cart-btn">Add To Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+
   </div>
+
   <footer id="footer">
     <div class="footer-brand">
       <h1>DON'T MISS NEW ITEMS</h1>
@@ -64,13 +95,16 @@
       </div>
     </div>
   </footer>
+  
   <div class="cursor" id="cursor">
     <svg width="60" height="60">
       <circle cx="30" cy="30" r="20" stroke="black" stroke-width="1" fill="white"></circle>
     </svg>
-  </div>   
+  </div>
+
+
   <script>
-  //  Cursor
+   // Cursor
   const cursor = document.getElementById("cursor")
   const footer = document.getElementById("footer")
   footer.addEventListener("mousemove", (e) => {
@@ -161,21 +195,109 @@
       ];
 
 
-      let movieContainer = document.getElementById("movie-container");
+  const movieContainer = document.getElementById("movie-container");
+  const main = document.getElementById("main");
+  const popup = document.getElementById("purchase-popup");
 
-      // Populate the movies container
-      for (let movie of MOVIES) {
-          let container = document.createElement("div");
-          container.classList.add("movie-item");
-          container.dataset.title = movie.title;
+  // Populate the main div (movies)
+  for (let movie of MOVIES) {
+      let container = document.createElement("div");
+      container.classList.add("movie-item");
+      container.dataset.title = movie.title;
+      container.dataset.src = "../media/movies/" + movie.posterFilename;
+      container.dataset.alt = "Poster of " + movie.title;
 
-          let poster = document.createElement("img");
-          poster.src = "../media/movies/" + movie.posterFilename;
-          poster.alt = "Poster of " + movie.title;
+      let poster = document.createElement("img");
+      poster.src = "../media/movies/" + movie.posterFilename;
+      poster.alt = "Poster of " + movie.title;
 
-          container.appendChild(poster);
-          movieContainer.appendChild(container);
-      }
+      container.appendChild(poster);
+      main.appendChild(container);
+  }
+
+  main.addEventListener("click", (e) => {
+    const clickedMovie = e.target.closest(".movie-item");
+    if (!clickedMovie) return;
+    main.classList.add("blur");
+    popup.classList.remove("hidden");
+    isPurchasePopupVisible = true;
+    console.log(clickedMovie.dataset.title); // Checker
+      // Update the popup with the clicked product details
+      const productCover = document.getElementById("purchase-popup-product-cover");
+      productCover.src = clickedMovie.dataset.src;
+      productCover.alt = clickedMovie.dataset.alt;
+
+      document.getElementById("purchase-popup-product-name").innerHTML = clickedMovie.dataset.title;
+
+    });
+    // Attach functionality to the close button
+    document.getElementById("button-close-purchase-popup").addEventListener("click", (e) => {
+      main.classList.remove("blur");
+      popup.classList.add("hidden");
+      isPurchasePopupVisible = false;
+    });
+
+    // ========== Purchase Popup ========== //
+    var purchaseAmount = 1;
+    const MIN_PURCHASE_AMOUNT = 1;
+    const MAX_PURCHASE_AMOUNT = 10;
+
+
+    function updatePurchaseAmount(id) {
+        document.getElementById(id).innerHTML = purchaseAmount;
+    }
+
+    function increasePurchaseAmountBy(value) {
+        purchaseAmount += value;
+        // Clamp the purchase amount
+        purchaseAmount = Math.min(Math.max(purchaseAmount, MIN_PURCHASE_AMOUNT), MAX_PURCHASE_AMOUNT);
+    }
+
+    function onClickHandler(value) {
+        // Apply increase or decrease
+        increasePurchaseAmountBy(value);
+
+        // Update the purchase amount on the site
+        updatePurchaseAmount("purchase-quantity");
+    }
+
+    // Set the initial purchase quantity
+    updatePurchaseAmount("purchase-quantity");
+
+    document.getElementById("decrease-button").addEventListener("click", (e) => {onClickHandler(-1)});
+    document.getElementById("increase-button").addEventListener("click", (e) => {onClickHandler(1)});
+    
+    // Add to cart functionality
+    const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+    document.getElementById("add-to-cart-btn").addEventListener("click", () => {
+    // Get current product info from popup
+    const product = {
+      title: document.getElementById("purchase-popup-product-name").textContent,
+      image: document.getElementById("purchase-popup-product-cover").src,
+      quantity: purchaseAmount
+    };
+
+    // Check if already in cart by title (or id)
+    const existingIndex = cart.findIndex(item => item.title === product.title);
+    if (existingIndex >= 0) {
+      cart[existingIndex].quantity += product.quantity;
+    } else {
+      cart.push(product);
+    }
+
+    // Save back to sessionStorage
+    sessionStorage.setItem("cart", JSON.stringify(cart));
+    alert(`${product.title} added to cart!`);
+
+    // Optionally close popup
+    main.classList.remove("blur");
+    popup.classList.add("hidden");
+    isPurchasePopupVisible = false;
+    });
+
+  
+   
+
   </script>
 <!-- Global JS -->
 <script src="script/main.js"></script>

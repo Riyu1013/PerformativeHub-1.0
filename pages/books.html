@@ -372,34 +372,33 @@
     document.getElementById("decrease-button").addEventListener("click", (e) => {onClickHandler(-1)});
     document.getElementById("increase-button").addEventListener("click", (e) => {onClickHandler(1)});
 
-
     // Add to cart functionality
     const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
-
     document.getElementById("add-to-cart-btn").addEventListener("click", () => {
-      // Get current product info from popup
-      const product = {
-        id: document.getElementById("title").textContent + "-" + getPurchaseAmount(),
-        title: document.getElementById("title").textContent,
-        author: document.getElementById("author").textContent,
-        tag: document.getElementById("tag").textContent,
-        image: document.getElementById("cover").src,
-        quantity: parseInt(getPurchaseAmount())
-      };
+    // Get current product info from popup
+    const product = {
+      title: document.getElementById("purchase-popup-product-name").textContent,
+      image: document.getElementById("purchase-popup-product-cover").src,
+      quantity: purchaseAmount
+    };
 
-      // Check if already in cart by title (or id)
-      const existingIndex = cart.findIndex(item => item.title === product.title);
-      if (existingIndex >= 0) {
-        cart[existingIndex].quantity += product.quantity;
-      } else {
-        cart.push(product);
-      }
+    // Check if already in cart by title (or id)
+    const existingIndex = cart.findIndex(item => item.title === product.title);
+    if (existingIndex >= 0) {
+      cart[existingIndex].quantity += product.quantity;
+    } else {
+      cart.push(product);
+    }
 
-      // Save back to sessionStorage
-      sessionStorage.setItem("cart", JSON.stringify(cart));
-      alert(`${product.title} added to cart!`);
+    // Save back to sessionStorage
+    sessionStorage.setItem("cart", JSON.stringify(cart));
+    alert(`${product.title} added to cart!`);
+
+    // Optionally close popup
+    main.classList.remove("blur");
+    popup.classList.add("hidden");
+    isPurchasePopupVisible = false;
     });
-
   </script>
   
 <!-- Global JS -->
