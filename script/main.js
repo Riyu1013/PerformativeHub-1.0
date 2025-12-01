@@ -29,7 +29,7 @@
 
     div.innerHTML = `
       <div class="product-img me-3">
-        <img src="${item.image}" alt="${item.title}" style="width:60px; height:auto; object-fit:cover;">
+        <img src="${item.image}" alt="${item.title}" style="width:10vw; height:100%; object-fit:cover;">
       </div>
       <div class="product-desc flex-grow-1">
         <strong>${item.title}</strong><br>
