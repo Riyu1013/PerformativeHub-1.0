@@ -23,11 +23,19 @@
       <div class="nav-item" id="nav-item">
         <a class="justify-content-end fs-5" href="about.html">About, </a>
         <a class="justify-content-end fs-5" href="contact.html">Contact, </a>
-        <a class="justify-content-end fs-5" href="">Cart</a>
+        <a class="justify-content-end fs-5" href="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Cart</a>
       </div>
     </div>
   </nav>
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel">Cart</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body" id="cart-items">
 
+    </div>
+  </div>
   <div class="row mt-5" id="books-container">
     <!-- Book Preview -->
     <div class="col-lg-4 d-flex flex-column align-items-center">
@@ -402,6 +410,6 @@
   </script>
   
 <!-- Global JS -->
-<script src="script/main.js"></script>
+<script defer src="../script/main.js"></script>
 </body>
 </html>

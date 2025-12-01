@@ -10,8 +10,7 @@
   footer.addEventListener("mouseleave", (e) => {
     document.body.style.cursor="default";
   })
-
-// PROGRAM TO POPULATE CART
+    // PROGRAM TO POPULATE CART
   function populateCart() {
   const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
   const cartContainer = document.getElementById("cart-items");
@@ -34,7 +33,6 @@
       </div>
       <div class="product-desc flex-grow-1">
         <strong>${item.title}</strong><br>
-        <small>${item.author}</small><br>
         <span>Quantity: ${item.quantity}</span>
       </div>
       <button class="btn btn-sm btn-danger remove-item">×</button>
@@ -53,5 +51,5 @@
 }
 
 // Call this whenever the cart offcanvas is shown
-    const offcanvasEl = document.getElementById('offcanvasRight');
-    offcanvasEl.addEventListener('show.bs.offcanvas', populateCart);
+const offcanvasEl = document.getElementById('offcanvasRight');
+offcanvasEl.addEventListener('show.bs.offcanvas', populateCart);
