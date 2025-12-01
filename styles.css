@@ -241,53 +241,17 @@ footer h1{
 /*End of Movie Page CSS */
 
 /*Start of Music Page CSS */
-
-  .music-body {
-    min-height: 100vh; 
-    min-width: 100vw;
-    margin: auto; 
-    margin-left: 1rem;
-    margin-right: 1rem;
-    display: flex;
-    justify-content: center; 
-    text-align: left;
-    align-items: flex-start;
-    flex-direction: row;
-    padding: 1rem;
-  }
-
-  #song-list {
-    flex: 1 1 50%;
-    padding-top: 1rem;
-  }
-
-#vinyl-container {
-    /*flex: 1 1 50%;*/
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-#vinyl-record {
-    width: 25rem;
-    height: auto;
-    display: block;
-}
-
 #album-cover-img {
-    position: absolute;
     width: 8rem; 
     height: 8rem;
     border-radius: 50%; 
-    z-index: 10; 
-    pointer-events: none;
+    z-index: 10;
     opacity: 0; 
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 1s ease-in-out;
 }
 
 .is-playing {
-    animation: spin 4s linear infinite; 
+    animation: spin 6s linear infinite; 
 }
 
 .is-playing #album-cover-img {

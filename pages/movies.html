@@ -21,16 +21,24 @@
       <div class="brand-wrapper">
         <a class="navbar-brand" id="hero-text.shrink" href="index.html">Performative <br> Website</a>
       </div>
-      <div class="nav-item">
+      <div class="nav-item" id="nav-item">
         <a class="justify-content-end fs-5" href="about.html">About, </a>
         <a class="justify-content-end fs-5" href="contact.html">Contact, </a>
-        <a class="justify-content-end fs-5" href="">Cart</a>
+        <a class="justify-content-end fs-5" href="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Cart</a>
       </div>
     </div>
   </nav>
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel">Cart</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body" id="cart-items">
 
-  <div id="movie-container">
-    
+    </div>
+  </div>
+
+  <div id="movie-container">  
     <p class="fs-2 text-start ms-3 mb-0">Movies</p>
     <div class="d-flex flex-wrap align-content-start justify-content-center" id="main"></div>
 
@@ -104,18 +112,6 @@
 
 
   <script>
-   // Cursor
-  const cursor = document.getElementById("cursor")
-  const footer = document.getElementById("footer")
-  footer.addEventListener("mousemove", (e) => {
-    cursor.style.left = e.pageX + "px";
-    cursor.style.top = e.pageY + "px";
-    cursor.style.display = "block";
-    document.body.style.cursor="none";
-  });
-  footer.addEventListener("mouseleave", (e) => {
-    document.body.style.cursor="default";
-  })
 
 
 
@@ -300,6 +296,6 @@
 
   </script>
 <!-- Global JS -->
-<script src="script/main.js"></script>
+<script defer src="../script/main.js"></script>
 </body>
 </html>
