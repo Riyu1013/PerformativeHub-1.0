@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Bootstrap JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap ICONS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
     <link rel="stylesheet" href="../styles.css">
     <title>Music Page</title>
 </head>
@@ -82,46 +90,11 @@
 <!-- Global JS -->
 <script defer src="../script/main.js"></script>
 
+<!-- Global JS -->
+<script src="../script/main.js"></script>
+<!-- MUSIC -->
+<script src="../script/data-music.js"></script>
 <script>
-  const SONGS = [
-    {
-      "title": "Bags",
-      "artist": "Clairo",
-      "coverFilename": "clairo.png",
-      "audioFilename": "clairo-bags.mp3"
-    },
-    {
-      "title": "Sofia",
-      "artist": "Clairo",
-      "coverFilename": "clairo.png",
-      "audioFilename": "clairo-sofia.mp3"
-    },
-    {
-      "title": "The Apartment We Won't Share",
-      "artist": "Niki",
-      "coverFilename": "niki.png",
-      "audioFilename": "niki-the-apartment-we-wont-share.mp3"
-    },
-    {
-      "title": "I Bet On Losing Dogs",
-      "artist": "Mitski",
-      "coverFilename": "mitski.jpg",
-      "audioFilename": "mitski-i-bet-on-losing-dogs.mp3"
-    },
-    {
-      "title": "Waiting Room",
-      "artist": "Phoebe Bridgers",
-      "coverFilename": "phoebe-bridgers.jpg",
-      "audioFilename": "phoebe-bridgers-waiting-room.mp3"
-    },
-    {
-      "title": "Olivia Dean",
-      "artist": "Dive",
-      "coverFilename": "olivia-dean.jpg",
-      "audioFilename": "olivia-dean-dive.mp3"
-    },
-  ]
-
   // Populate the music table
   const tbody = document.getElementById("tbody-songs");
 
@@ -150,6 +123,9 @@
 
   const vinylContainer = document.getElementById('vinyl-container');
   const audioPlayer = document.getElementById('audio-player');
+
+  // IMPORTANT!
+  audioPlayer.volume = 0.5;
 
   const cover = document.createElement("img");
   cover.id = "album-cover-img";
@@ -190,12 +166,12 @@
         vinylContainer.classList.add('is-playing'); // This starts the CSS animation and fades in the cover
         
         audioPlayer.play()
-        //   .then(() => {
-        //       console.log(`Now playing: ${clickedRow.firstElementChild.textContent}`);
-        //   })
-        //   .catch(error => {
-        //       console.error("Audio playback failed. NOTE: HTML <audio> cannot play YouTube links. Use direct audio files (.mp3, .wav).", error);
-        // });
+          .then(() => {
+              console.log(`Now playing: ${clickedRow.firstElementChild.textContent}`);
+          })
+          .catch(error => {
+              console.error("Audio playback failed.", error);
+        });
       }, 100); 
     }
   });
