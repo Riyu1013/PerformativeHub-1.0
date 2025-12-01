@@ -227,6 +227,17 @@ footer h1{
   position: fixed;
   display:"block"
 }
+
+#main{
+  filter: blur(0px);
+  transition: filter 0.8s ease-in-out;
+}
+
+#main.blur{
+  filter: blur(30px);
+  transition: filter 0.8s ease-in-out;
+}
+
 /*End of Movie Page CSS */
 
 /*Start of Music Page CSS */
