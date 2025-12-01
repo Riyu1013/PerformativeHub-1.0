@@ -88,8 +88,10 @@ function onClickHandler(value) {
     updatePurchaseQuantityBy(value);
 }
 
-document.getElementById(DECREASE_BUTTON_ID).addEventListener("click", (e) => {onClickHandler(-1)});
-document.getElementById(INCREASE_BUTTON_ID).addEventListener("click", (e) => {onClickHandler(1)});
+function attachPurchaseControlButtonHandlers() {
+  document.getElementById(DECREASE_BUTTON_ID).addEventListener("click", (e) => {onClickHandler(-1)});
+  document.getElementById(INCREASE_BUTTON_ID).addEventListener("click", (e) => {onClickHandler(1)});
+}
 
 
 // ========== ADD TO CART ========== //

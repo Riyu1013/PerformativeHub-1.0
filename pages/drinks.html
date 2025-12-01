@@ -152,7 +152,7 @@
     productCover.alt = clickedDrink.dataset.alt;
 
     document.getElementById("purchase-popup-product-name").innerHTML = clickedDrink.dataset.title;
-    resetPurchaseAmount();
+    resetPurchaseQuantity();
 
     // Show the modal popup
     const popup = new bootstrap.Modal("#purchase-popup");
@@ -164,10 +164,12 @@
     const product = {
       title: document.getElementById("purchase-popup-product-name").textContent,
       image: document.getElementById("purchase-popup-product-cover").src,
-      quantity: parseInt(getPurchaseAmount())
+      quantity: parseInt(getPurchaseQuantity())
     }
     addToCart(product);
   });
+
+  attachPurchaseControlButtonHandlers();
   </script>
 
 </body> 
