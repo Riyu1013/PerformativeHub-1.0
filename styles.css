@@ -180,6 +180,7 @@ footer h1{
   flex-direction: row;
   align-items: center;
   padding: 5%;
+  gap: 5rem;
 }
 
 .footer-nav h4{
