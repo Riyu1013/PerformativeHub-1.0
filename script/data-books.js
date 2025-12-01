@@ -60,83 +60,83 @@ const BOOKS = [
     "tag": "Dark Satire",
     "author": "Chuck Palahniuk",
     "year": 1996,
-    "coverFilename": ""
+    "coverFilename": "fight-club.jpg"
   },
   {
     "title": "The Old Man and the Sea",
     "tag": "Classic Masculinity",
     "author": "Ernest Hemingway",
     "year": 1952,
-    "coverFilename": ""
+    "coverFilename": "the-old-man-and-the-sea.jpg"
   },
   {
     "title": "The 48 Laws of Power",
     "tag": "Self-Help / Strategy",
     "author": "Robert Greene",
     "year": 1998,
-    "coverFilename": ""
+    "coverFilename": "the-48-laws-of-power.jpg"
   },
   {
     "title": "Atomic Habits",
     "tag": "Self-Improvement",
     "author": "James Clear",
     "year": 2018,
-    "coverFilename": ""
+    "coverFilename": "atomic-habits.jpg"
   },
   {
     "title": "Can't Hurt Me",
     "tag": "Grit / Self-Help",
     "author": "David Goggins",
     "year": 2018,
-    "coverFilename": ""
+    "coverFilename": "cant-hurt-me.jpg"
   },
   {
     "title": "The Art of War",
     "tag": "Strategy",
     "author": "Sun Tzu",
     "year": 1963,
-    "coverFilename": ""
+    "coverFilename": "the-art-of-war.jpg"
   },
   {
     "title": "Sapiens",
     "tag": "Pop Nonfiction / Anthropology Flex",
     "author": "Yuval Noah Harari",
     "year": 2014,
-    "coverFilename": ""
+    "coverFilename": "sapiens.jpg"
   },
   {
     "title": "Zero to One",
     "tag": "Startup / Business",
     "author": "Peter Thiel",
     "year": 2014,
-    "coverFilename": ""
+    "coverFilename": "zero-to-one.png"
   },
   {
     "title": "Gödel, Escher, Bach",
     "tag": "Intellectual Flex / Math-Philosophy",
     "author": "Douglas Hofstadter",
     "year": 1979,
-    "coverFilename": ""
+    "coverFilename": "godel-escher-bach.webp"
   },
   {
     "title": "1984",
     "tag": "Classic Dystopia",
     "author": "George Orwell",
     "year": 1949,
-    "coverFilename": ""
+    "coverFilename": "1984.jpg"
   },
   {
     "title": "On the Road",
     "tag": "Beat Literature",
     "author": "Jack Kerouac",
     "year": 1957,
-    "coverFilename": ""
+    "coverFilename": "on-the-road.png"
   },
   {
     "title": "Slaughterhouse-Five",
     "tag": "Anti-War Literature",
     "author": "Kurt Vonnegut",
     "year": 1969,
-    "coverFilename": ""
+    "coverFilename": "slaughter-house-five.jpg"
   }
 ];
