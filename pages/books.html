@@ -219,6 +219,7 @@
       currentActiveRow.classList.remove("table-active");
       purchaseControl.classList.add("visually-hidden");
       clearPreviewButton.classList.add("visually-hidden");
+
       resetPurchaseQuantity();
     });
 
@@ -227,6 +228,7 @@
       const product = {
         title: document.getElementById("title").textContent,
         image: document.getElementById("cover").src,
+
         quantity: parseInt(getPurchaseQuantity())
       }
       addToCart(product);

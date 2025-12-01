@@ -100,7 +100,6 @@
   <footer id="footer">
     <div class="footer-brand">
       <h1>DON'T MISS NEW ITEMS</h1>
-
       <form class="w-100 m-0">
         <div class="row g-3">
           <div class="col-md-10">
@@ -140,70 +139,68 @@
 <!-- END OF FOOTER BOILERPLATE -->
 
   <script>
-      const labubus = [
-          { name: "Labubu na Brown", img: "../media/labubu-2.png" },
-          { name: "Labubu na Green", img: "../media/labubu-3.png" },
-          { name: "Labubu na Gray", img: "../media/labubu-4.png" },
-          { name: "Labubu na may Pumpkin", img: "../media/labubu-5.png" }
-      ];
+    const labubus = [
+        { name: "Labubu na Brown", img: "../media/labubu-2.png" },
+        { name: "Labubu na Green", img: "../media/labubu-3.png" },
+        { name: "Labubu na Gray", img: "../media/labubu-4.png" },
+        { name: "Labubu na may Pumpkin", img: "../media/labubu-5.png" }
+    ];
 
-      function getCurrentLabubuIndex() {
-          const total = labubus.length;
-          return ((indexSlider % total) + total) % total; 
-      }
+    function getCurrentLabubuIndex() {
+        const total = labubus.length;
+        return ((indexSlider % total) + total) % total; 
+    }
 
-      function getCurrentLabubu() {
-          return labubus[getCurrentLabubuIndex()];
-      }
+    function getCurrentLabubu() {
+        return labubus[getCurrentLabubuIndex()];
+    }
 
-      const labubuInfo = document.querySelector('.labubu-title');
-      const labubuTitle = document.getElementById("purchase-popup-product-name");
-      const labubuImage = document.getElementById("purchase-popup-product-cover");
+    const labubuInfo = document.querySelector('.labubu-title');
+    const labubuTitle = document.getElementById("purchase-popup-product-name");
+    const labubuImage = document.getElementById("purchase-popup-product-cover");
 
 
-      function updateInfo() {
-          const current = getCurrentLabubu();
+    function updateInfo() {
+      const current = getCurrentLabubu();
 
-          // Set product name
-          labubuTitle.textContent = current.name;
+      // Set product name
+      labubuTitle.textContent = current.name;
 
-          // Set product image
-          labubuImage.src = current.img;
-      }
+      // Set product image
+      labubuImage.src = current.img;
+    }
       
-      const imgSlider = document.querySelector('.img-slider');
-      const nextBtn = document.querySelector('.next-btn');
-      const prevBtn = document.querySelector('.prev-btn');
+    const imgSlider = document.querySelector('.img-slider');
+    const nextBtn = document.querySelector('.next-btn');
+    const prevBtn = document.querySelector('.prev-btn');
 
-      let indexSlider = 0;
+    let indexSlider = 0;
 
-      nextBtn.addEventListener('click', () => {
-          indexSlider++;
-          imgSlider.style.transform = `rotate(${indexSlider * -90}deg)`;
-          // console.log("Front image:", getCurrentLabubu());
-          updateInfo();
-      });
+    nextBtn.addEventListener('click', () => {
+        indexSlider++;
+        imgSlider.style.transform = `rotate(${indexSlider * -90}deg)`;
+        updateInfo();
+    });
 
-      prevBtn.addEventListener('click', () => {
-          indexSlider--;
-          imgSlider.style.transform = `rotate(${indexSlider * -90}deg)`;
-          // console.log("Front image:", getCurrentLabubu());
-          updateInfo();
-      });
+    prevBtn.addEventListener('click', () => {
+        indexSlider--;
+        imgSlider.style.transform = `rotate(${indexSlider * -90}deg)`;
+        updateInfo();
+    });
 
-      document.getElementById(ADD_TO_CART_BUTTON).addEventListener("click", () => {
-        // Get current product info from popup and add to cart
-        const product = {
-          title: document.getElementById("purchase-popup-product-name").textContent,
-          image: document.getElementById("purchase-popup-product-cover").src,
-          quantity: parseInt(getPurchaseQuantity())
-        }
-        addToCart(product);
+    document.getElementById(ADD_TO_CART_BUTTON).addEventListener("click", () => {
+      // Get current product info from popup and add to cart
+      const product = {
+        title: document.getElementById("purchase-popup-product-name").textContent,
+        image: document.getElementById("purchase-popup-product-cover").src,
+        quantity: parseInt(getPurchaseQuantity())
+      }
+      addToCart(product);
 
-        resetPurchaseQuantity();
-      });
+      resetPurchaseQuantity();
+    });
 
-      updateInfo(); // Show the first labubu on the purchase popup
+    updateInfo(); // Show the first labubu on the purchase popup
       
   </script>
 </body>

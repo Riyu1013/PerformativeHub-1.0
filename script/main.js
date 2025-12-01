@@ -63,6 +63,7 @@ const PURCHASE_QUANTITY_ID = "purchase-quantity";
 const DECREASE_BUTTON_ID = "decrease-button";
 const INCREASE_BUTTON_ID = "increase-button";
 
+
 function getPurchaseQuantity() {
     return document.getElementById(PURCHASE_QUANTITY_ID).innerHTML;
 }
